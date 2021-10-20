@@ -1,0 +1,131 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Display.gd" type="Script" id=1]
+[ext_resource path="res://gfx/hope.png" type="Texture" id=2]
+[ext_resource path="res://audio/checkup1.wav" type="AudioStream" id=3]
+[ext_resource path="res://gfx/blackness.png" type="Texture" id=4]
+[ext_resource path="res://gfx/checkup.png" type="Texture" id=5]
+[ext_resource path="res://gfx/mob_msg.png" type="Texture" id=6]
+[ext_resource path="res://gfx/check up.png" type="Texture" id=7]
+[ext_resource path="res://gfx/checkup_completed.png" type="Texture" id=8]
+[ext_resource path="res://gfx/checkup_msg.png" type="Texture" id=9]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 320, 180 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 320, 180 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Control" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="HopeBg" type="ColorRect" parent="YSort"]
+margin_left = 4.23785
+margin_top = 5.82705
+margin_right = 84.2379
+margin_bottom = 11.827
+color = Color( 0.00392157, 0.0627451, 0.2, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HopeMeter" type="ColorRect" parent="YSort"]
+margin_left = 4.23785
+margin_top = 5.82705
+margin_right = 84.2379
+margin_bottom = 11.827
+color = Color( 0.709804, 0.917647, 0.890196, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="YSort"]
+position = Vector2( 95.8505, 9.6202 )
+scale = Vector2( 0.709708, 0.633041 )
+texture = ExtResource( 2 )
+
+[node name="CheckUpBg" type="ColorRect" parent="YSort"]
+margin_left = 4.23785
+margin_top = 14.827
+margin_right = 84.2379
+margin_bottom = 20.827
+color = Color( 0.00392157, 0.0627451, 0.2, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckUpTimer" type="ColorRect" parent="YSort"]
+margin_left = 4.238
+margin_top = 14.827
+margin_right = 84.238
+margin_bottom = 20.827
+color = Color( 0.0823529, 0.980392, 0.00784314, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckUpText" type="AnimatedSprite" parent="YSort"]
+visible = false
+position = Vector2( 160.611, 92.4986 )
+scale = Vector2( 1.1, 1.1 )
+frames = SubResource( 3 )
+frame = 1
+playing = true
+
+[node name="Sprite2" type="Sprite" parent="YSort"]
+position = Vector2( 106.723, 17.1101 )
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 7 )
+
+[node name="CheckUpTimer" type="Timer" parent="."]
+wait_time = 2.707
+
+[node name="Alarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 4 )
+
+[node name="Message" type="Sprite" parent="."]
+visible = false
+position = Vector2( 159.77, 95.0213 )
+texture = ExtResource( 6 )
+
+[node name="PunishTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="MobMsg" type="Sprite" parent="."]
+visible = false
+position = Vector2( 261.23, 24.2535 )
+scale = Vector2( 0.583114, 0.583114 )
+texture = ExtResource( 8 )
+
+[node name="MobMsgTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MobMsgCheckup" type="Sprite" parent="."]
+visible = false
+position = Vector2( 261.23, 24.253 )
+scale = Vector2( 0.583, 0.583 )
+texture = ExtResource( 9 )
+[connection signal="timeout" from="CheckUpTimer" to="." method="_on_CheckUpTimer_timeout"]
+[connection signal="timeout" from="PunishTimer" to="." method="_on_PunishTimer_timeout"]
+[connection signal="timeout" from="MobMsgTimer" to="." method="_on_MobMsgTimer_timeout"]

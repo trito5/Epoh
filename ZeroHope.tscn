@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://WorkArea.tscn" type="PackedScene" id=1]
+[ext_resource path="res://gfx/alice.png" type="Texture" id=2]
+[ext_resource path="res://audio/Surveillance.wav" type="AudioStream" id=3]
+[ext_resource path="res://gfx/gameover.png" type="Texture" id=4]
+[ext_resource path="res://gfx/blackness.png" type="Texture" id=5]
+[ext_resource path="res://ZeroHope.gd" type="Script" id=6]
+[ext_resource path="res://gfx/enter.png" type="Texture" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 208, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 224, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -6.324
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -14.3348
+margin_top = -18.0203
+margin_right = 300.665
+margin_bottom = 176.98
+rect_scale = Vector2( 1.078, 1 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorkArea" parent="." instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 183.381, 146.164 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 159.513, 124.14 )
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="Black" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 177.533, 187.545 )
+texture = ExtResource( 4 )
+
+[node name="Enter" type="Sprite" parent="."]
+position = Vector2( 308.347, 163.518 )
+texture = ExtResource( 7 )
